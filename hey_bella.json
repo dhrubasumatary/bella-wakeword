@@ -3,7 +3,7 @@
   "wake_word": "Hey Bella",
   "author": "Alex",
   "website": "",
-  "model": "hey_bella.tflite",
+  "model": "https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.tflite",
   "trained_languages": ["en"],
   "version": 2,
   "micro": {
