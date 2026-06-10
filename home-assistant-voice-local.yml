@@ -1717,8 +1717,8 @@ micro_wake_word:
     gain_factor: 4
   stop_after_detection: false
     models:
-    - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json?v=6
-      id: hey_bella
+    - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json
+      id: okay_nabu
     - model: hey_jarvis
       id: hey_jarvis
     - model: hey_mycroft
