@@ -1718,7 +1718,7 @@ micro_wake_word:
   stop_after_detection: false
   models:
     - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json
-      id: okay_nabu
+      id: hey_bella
       
     - model: hey_jarvis
       id: hey_jarvis
