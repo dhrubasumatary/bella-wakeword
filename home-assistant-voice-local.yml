@@ -1717,16 +1717,12 @@ micro_wake_word:
     gain_factor: 4
   stop_after_detection: false
   models:
-        - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json
+    - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json
       id: okay_nabu
     - model: hey_jarvis
       id: hey_jarvis
     - model: hey_mycroft
       id: hey_mycroft
-    # --- PATCH: Hey Bella custom wake word ---
-    - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json
-      id: hey_bella
-    # --- END PATCH ---
     - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
       id: stop
       internal: true
