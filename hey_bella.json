@@ -2,7 +2,7 @@
   "type": "micro",
   "wake_word": "Hey Bella",
   "author": "Alex",
-  "website": "",
+  "website": "https://github.com/alex323451/bella-wakeword",
   "model": "hey_bella.tflite",
   "trained_languages": ["en"],
   "version": 2,
