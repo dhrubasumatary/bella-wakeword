@@ -1716,7 +1716,7 @@ micro_wake_word:
     channels: 1
     gain_factor: 4
   stop_after_detection: false
-    models:
+models:
       - model: github://alex323451/bella-wakeword/hey_bella.json@main
         id: hey_bella
       - model: hey_jarvis
