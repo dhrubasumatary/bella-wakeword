@@ -2,8 +2,10 @@
 # LOCAL COPY OF:
 #   github://esphome/home-assistant-voice-pe/home-assistant-voice.yaml@dev
 #
-# PATCH APPLIED: hey_bella model added to micro_wake_word.models list
-#   (between hey_mycroft and stop)
+# PATCH APPLIED: in micro_wake_word.models the stock "okay_nabu" entry is
+#   replaced by the custom "hey_bella" model (loaded via a full raw HTTPS URL
+#   to hey_bella.json). hey_jarvis, hey_mycroft and stop are kept. See the
+#   commented PATCHED BLOCK above the micro_wake_word: section for details.
 #
 # Fetched: 2026-06-09
 # Source:  https://raw.githubusercontent.com/esphome/home-assistant-voice-pe/dev/home-assistant-voice.yaml
@@ -1702,12 +1704,23 @@ audio_dac:
     i2c_id: internal_i2c
 
 # =============================================================================
-# PATCHED BLOCK — only change from upstream is the addition of hey_bella
-# between hey_mycroft and stop.
-# All stock IDs (okay_nabu, hey_jarvis, hey_mycroft, stop) are preserved.
-# The sensitivity select lambda still works because it only references
-# okay_nabu, hey_jarvis, hey_mycroft — hey_bella is not in that lambda,
-# which is intentional (its cutoff is set by its own manifest default: 0.5).
+# PATCHED BLOCK — the only change from upstream is the wake-word model list.
+# The stock "okay_nabu" entry is replaced by the custom "hey_bella" model in
+# the FIRST slot, so "Hey Bella" is the model that is enabled by default on
+# first boot. The stock hey_jarvis, hey_mycroft and stop entries are preserved
+# (stop is required by the timer logic; hey_jarvis/hey_mycroft are referenced
+# by the "Wake word sensitivity" select lambda further below).
+#
+# The hey_bella model is loaded from a FULL raw HTTPS URL to its manifest —
+# exactly the same mechanism the stock "stop" model uses. ESPHome downloads the
+# manifest, then resolves the manifest's relative "model" field
+# ("hey_bella.tflite") against the manifest URL, fetching the .tflite from the
+# same directory. A plain https:// URL is the most broadly compatible model
+# source (no git clone / "github://" shorthand resolution inside the add-on),
+# which is what previously triggered:
+#   "Invalid manifest file: Expected a file scheme or a URL scheme with host"
+# The sensitivity lambda below was updated to tune hey_bella/hey_jarvis/
+# hey_mycroft (the okay_nabu reference was removed alongside its model entry).
 # =============================================================================
 micro_wake_word:
   id: mww
@@ -1717,7 +1730,7 @@ micro_wake_word:
     gain_factor: 4
   stop_after_detection: false
   models:
-    - model: github://alex323451/bella-wakeword/hey_bella.json@main
+    - model: https://raw.githubusercontent.com/alex323451/bella-wakeword/main/hey_bella.json
       id: hey_bella
     - model: hey_jarvis
       id: hey_jarvis
